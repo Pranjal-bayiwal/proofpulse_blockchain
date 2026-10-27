@@ -1,0 +1,16 @@
+{
+  "name": "proofpulse-chain",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ProofPulse smart contract tooling (compile with solc-js, local chain with Hardhat node)",
+  "scripts": {
+    "compile": "node scripts/compile.js",
+    "node": "hardhat node"
+  },
+  "dependencies": {
+    "solc": "^0.8.26"
+  },
+  "devDependencies": {
+    "hardhat": "^2.22.0"
+  }
+}

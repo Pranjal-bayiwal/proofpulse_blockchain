@@ -1,0 +1,17 @@
+Smart Campus Energy Monitor: Final Project Report
+
+Overview
+
+This project builds a low cost energy monitor for a university hostel. Clamp sensors measure the current drawn by each floor, a microcontroller samples the readings every ten seconds and a small server stores the history. A web dashboard shows live consumption, daily totals and unusual spikes so that the maintenance team can find faulty appliances quickly.
+
+Design decisions
+
+We chose a message queue between the microcontroller and the server so that short network outages do not lose readings. Data is aggregated into five minute windows before it is stored, which reduced the database size by roughly ninety percent compared with keeping every raw sample. Alerts are raised when the moving average rises more than thirty percent above the weekly baseline for the same hour.
+
+Testing
+
+The prototype ran for three weeks on two floors. Readings were compared with the building meter and stayed within four percent. Two faulty water heaters were found during the trial, which justified the cost of the sensors within the first month. The team also wrote unit tests for the aggregation code and a replay tool that feeds recorded data back through the alert rules.
+
+Conclusion
+
+The monitor is cheap, simple to install and gives maintenance staff actionable information. Next steps include adding temperature sensors, a mobile app and a model that predicts tomorrow's consumption.

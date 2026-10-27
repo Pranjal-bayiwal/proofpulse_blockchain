@@ -1,0 +1,20 @@
+# docker compose up --build   ->  http://localhost:8080
+services:
+  backend:
+    build: { context: ., dockerfile: deploy/backend.Dockerfile }
+    environment:
+      SECRET_KEY: ${SECRET_KEY:?set SECRET_KEY in a .env file next to this compose file}
+      PSEUDONYM_SALT: ${PSEUDONYM_SALT:?set PSEUDONYM_SALT}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?set ADMIN_PASSWORD}
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost:8080}
+      CORS_ORIGINS: ${PUBLIC_BASE_URL:-http://localhost:8080}
+      BLOCKCHAIN_MODE: ${BLOCKCHAIN_MODE:-embedded}
+      RPC_URL: ${RPC_URL:-}
+      CHAIN_PRIVATE_KEY: ${CHAIN_PRIVATE_KEY:-}
+    volumes: [ "pp-data:/app/data" ]
+  web:
+    build: { context: ., dockerfile: deploy/frontend.Dockerfile }
+    ports: [ "8080:80" ]
+    depends_on: [ backend ]
+volumes:
+  pp-data:

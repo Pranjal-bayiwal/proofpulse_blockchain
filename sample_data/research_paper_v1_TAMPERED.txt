@@ -1,0 +1,21 @@
+Anchoring Document Fingerprints on a Public Ledger: A Lightweight Provenance Model for Student Research
+
+Abstract
+
+Academic institutions increasingly receive digital submissions such as theses, datasets, lab reports and source code, yet they have few inexpensive tools to prove that a file has not changed after it was handed in. This paper proposes a lightweight provenance model in which only the cryptographic fingerprint of a document is written to a blockchain, while the document itself never leaves the author's control. We describe how a SHA-256 digest, a pseudonymous author identifier and a block timestamp together create evidence of existence, ownership and integrity at a specific moment in time.
+
+1. Motivation
+
+When a supervisor receives a report by email there is no neutral record of what the file contained on the day it was sent. Cloud storage timestamps can be edited by administrators, and email headers are easy to forge. A public ledger offers an append-only witness that no single party can rewrite. By storing only a fixed-size digest, the approach avoids the privacy and storage costs of placing documents on chain.
+
+2. Method
+
+Each submission is hashed in the browser or on the server. The digest is sent to a smart contract that records the digest, the hash of the submitting account and the block time. Later versions of the same work are appended to the same record, producing a verifiable history. Reviewers can approve or reject a specific version, and each decision is also written to the chain so that approvals cannot be quietly removed.
+
+3. Verification
+
+To verify a file, a third party computes its digest and compares it with the value stored for the claimed record. Even a single changed character produces a completely different digest, so tampering is detected immediately. Because the registry is public, verification does not require trusting the institution that operates the platform.
+
+4. Limitations
+
+A fingerprint proves that a file exists in a given form at a given time, not that the registrant wrote it. For that reason the platform also reports duplicate and near duplicate content so that a human reviewer can judge originality. Future work will study perceptual fingerprints for figures and audio.
